@@ -60,7 +60,7 @@ const TabsLayout = () => {
                 headerShown: false,
                 tabBarIcon: ({ color, focused }) => (
                 <TabIcon
-                    icon={icons.home}
+                    icon={icons.upload}
                     color={color}
                     name="Return"
                     focused={focused}

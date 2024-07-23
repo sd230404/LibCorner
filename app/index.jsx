@@ -5,9 +5,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../constants/color';
 import {images} from '../constants'
 import CustomButton from '../components/CustomButton';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 
 export default function App() {
+  const {isLoading,isLoggedIn} = useGlobalContext();
+  if(!isLoading && isLoggedIn) return <Redirect href="/home" />
   return (
     <SafeAreaView className=" h-full" style={{backgroundColor: colors.primary}}>
       <ScrollView contentContainerStyle={{height:'100%'}}>
@@ -66,7 +69,7 @@ export default function App() {
 
         </View>
       </ScrollView>
-      <StatusBar backgroundColor="#161622" style='light' />
+      <StatusBar backgroundColor={colors.primary} style='light' />
     </SafeAreaView>
   );
 }
