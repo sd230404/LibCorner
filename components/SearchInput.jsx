@@ -13,7 +13,7 @@ const SearchInput = ({ initialQuery }) => {
       <TextInput
         className="text-base mt-0.5 text-white flex-1 font-pregular"
         value={query}
-        placeholder="Search a book"
+        placeholder="Search for a book"
         placeholderTextColor="#CDCDE0"
         onChangeText={(e) => setQuery(e)}
       />

@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, RefreshControl, TextInput, Button, StyleSheet } from 'react-native'
+import { View, Text, FlatList, Image, RefreshControl, TextInput,StyleSheet } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -9,19 +9,21 @@ import { images } from "../../constants";
 import SearchInput from "../../components/SearchInput"
 import EmptyState from "../../components/EmptyState"
 import CustomButton from '../../components/CustomButton';
-import color from '../../constants/color';
-import {useFonts} from 'expo-font'
-
+import DueDate from '../../components/DueDate';
+import { getAllBooks } from '../../lib/appwrite';
+import useAppWrite from '../../lib/useAppWrite'
 
 const Home = () => {
-
+  const {data:booksData ,refetch} = useAppWrite(getAllBooks);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
     setRefreshing(true);
-    // await refetch();
+    await refetch();
     setRefreshing(false);
   };
+
+  //console.log(booksData);
 
   const [bookName, setBookName] = useState('');
   const [books, setBooks] = useState([]);
@@ -94,7 +96,7 @@ const Home = () => {
 
               <View className="mt-1.5">
                 <Image
-                  source={images.logoSmall}
+                  source={images.logo1Small}
                   className="w-9 h-10"
                   resizeMode="contain"
                 />
@@ -117,10 +119,10 @@ const Home = () => {
             />
             <View className="w-full flex-1 pt-5 pb-8">
               <Text className="text-xl font-pregular text-gray-100 mb-3">
-                Newly Added Books
+                Due Date Approaching
               </Text>
 
-              {/* <DueDate posts={latestPosts ?? []} /> */}
+              <DueDate books={[{id:1},{id:2},{id:3}] ?? []} />
             </View>
           </View>
         )}
